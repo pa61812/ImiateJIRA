@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ImiateJIRANetCore.Models.JiraOrder>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelModel => item.JiraID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelModel => item.JiraTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelModel => item.JiraStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelModel => item.Jiradescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelModel => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelModel => item.CreatedUser)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditJira", new { key = item.ID.ToString() })
+
+        </td>
+    </tr>
+}

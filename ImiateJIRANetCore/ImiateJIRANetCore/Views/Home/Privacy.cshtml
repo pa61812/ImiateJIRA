@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ImiateJIRANetCore.Models.JiraOrder>
+
+<div>
+    <input type="button" onclick="logout()" value="登出" />
+</div>
+
+
+<table class="table">
+    <tr>
+        <td>單號</td>
+        <td>問題</td>
+        <td>JIRA狀態</td>
+        <td>問題簡述</td>
+        <td>建立日期</td>
+        <td>建立者</td>
+        <td> </td>
+    </tr>
+    <tbody id="bg">
+        <partial name="_PartialJira" model="Model" />
+    </tbody>
+</table>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+      
+
+       
+
+        function logout() {
+
+            $.ajax({
+                url: '/Login/logout',
+                type: 'Post',
+                success: function () {
+                    top.location.href = '/home/Index/'
+                }
+            });
+
+        }
+    </script>
+}

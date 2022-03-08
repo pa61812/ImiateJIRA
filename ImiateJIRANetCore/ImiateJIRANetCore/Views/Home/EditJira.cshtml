@@ -1,0 +1,63 @@
+﻿@model ImiateJIRANetCore.Models.JiraOrder
+<br />
+
+    <div>
+        <p>單號:<input type="text" id="JiraID" value="@Model.JiraID" readonly /></p>
+    </div>
+    <div>
+        <p>問題:<input type="text" id="JiraTitle" value="@Model.JiraTitle" /></p>
+    </div>
+    <div>
+        <select id="JiraStatus"></select>
+
+        <p style="display: none">狀態:<input type="text" id="txtJiraStatus" value="@Model.JiraStatus" /></p>
+    </div>
+    <div>
+        <p>問題簡述:<input type="text" id="Jiradescription" value="@Model.Jiradescription" /></p>
+    </div>
+    <div>
+        <p>建立日期:<input type="text" id="CreatedDate" value="@Model.CreatedDate" readonly/></p>
+    </div>
+    <div>
+        <p> 建立者:<input type="text" id="CreatedUser" value="@Model.CreatedUser" readonly/></p>
+    </div>
+
+
+<div class="container">
+    <BR />
+    <div>
+        <input type="button" id="Saved" value="存檔" />
+    </div>
+</div>
+@section scripts{ 
+    <script>
+        Load()
+        function Load() {
+            $.ajax({
+                url: "/Common/getSelects",
+                type: "Get",
+                data: { codeType:"JiraStatus"},
+                dataType: "JSON",
+                success: function (data) {
+                    debugger
+
+                    var txtjiraStatus = document.getElementById("txtJiraStatus")
+                    var jiraStatus = document.getElementById("JiraStatus");
+                    for (var i in data) {
+                        var objOption = new Option(data[i]["codeName"], data[i]["systemCode"]);
+                        jiraStatus.add(objOption)
+
+                        if (txtjiraStatus.val == data[i]["systemCode"]) {
+                            jiraStatus[i].selected=true
+                        }
+                    }
+                   
+                }
+            });
+        }
+
+
+    </script>
+}
+
+
